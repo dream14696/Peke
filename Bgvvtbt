@@ -605,7 +605,7 @@ Follow.Parent = ConfigPage
 local Copy = button(ConfigPage, "COPY PROFILE", 26, 32)
 
 --------------------------------------------------
--- AUTOEJECCIÓN (AUTOEXEC)
+-- AUTOEJECCIÓN (AUTOEXEC) - Actualizado con nuevo repositorio
 --------------------------------------------------
 local autoFileName = "MM2_Auto.lua"
 pcall(function()
@@ -613,7 +613,7 @@ pcall(function()
 end)
 
 local initialAutoExecState = false
-pcall(function()
+pcall()
 	initialAutoExecState = isfile("autoexec/" .. autoFileName)
 end)
 
@@ -621,7 +621,7 @@ createToggleRow(ConfigPage, "Autoejecutar", initialAutoExecState, 64, function(v
 	pcall(function()
 		local autoPath = "autoexec/" .. autoFileName
 		if val then
-			local content = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dream14696/Esto-no-te-importa/refs/heads/main/murder%20mystery%20keyless.txt"))()]]
+			local content = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/dream14696/Test-murder-mistery-keyless/main/Test"))()]]
 			writefile(autoPath, content)
 		else
 			if isfile(autoPath) then delfile(autoPath) end
@@ -632,11 +632,11 @@ end)
 --------------------------------------------------
 -- SISTEMA DE RESEÑAS Y COOLDOWN DE 24 HORAS
 --------------------------------------------------
-createSectionTitle(ConfigPage, "Enviar Sugerencia", 112)
+createSectionTitle(ConfigPage, "Enviar Sugerencia", 114)
 
 local ReviewBoxBg = Instance.new("Frame")
 ReviewBoxBg.Size = UDim2.new(1, 0, 0, 55)
-ReviewBoxBg.Position = UDim2.fromOffset(0, 139)
+ReviewBoxBg.Position = UDim2.fromOffset(0, 142)
 ReviewBoxBg.BackgroundColor3 = Color3.fromRGB(10, 17, 28)
 ReviewBoxBg.Parent = ConfigPage
 cr(ReviewBoxBg, 9)
@@ -658,7 +658,7 @@ ReviewTextBox.TextYAlignment = Enum.TextYAlignment.Top
 ReviewTextBox.ClearTextOnFocus = false
 ReviewTextBox.Parent = ReviewBoxBg
 
-local SendReviewBtn = button(ConfigPage, "ENVIAR SUGERENCIA  ✈", 201, 30)
+local SendReviewBtn = button(ConfigPage, "ENVIAR SUGERENCIA  ✈", 204, 30)
 
 -- Elementos de Animación de Éxito y Agradecimiento (Overlay sobre el menú principal)
 local SuccessCheck = Instance.new("TextLabel")
@@ -784,17 +784,14 @@ end)
 SendReviewBtn.MouseButton1Click:Connect(function()
 	local text = ReviewTextBox.Text
 	if string.len(text) > 2 then
-		-- Guardar timestamp de expiración (24 horas = 86400 segundos)
 		local expireTime = os.time() + 86400
 		pcall(function() writefile(COOLDOWN_FILE, tostring(expireTime)) end)
 
 		enviarReseñaDiscord(text)
 		
-		-- Ocultar elementos de configuración temporalmente
 		ReviewBoxBg.Visible = false
 		SendReviewBtn.Visible = false
 
-		-- Animar aparición del éxito y mensaje
 		SuccessCheck.TextSize = 1
 		SuccessCheck.TextTransparency = 0
 		SuccessMsg.TextTransparency = 0
@@ -821,7 +818,7 @@ end)
 
 local ThemeLabel = Instance.new("TextLabel")
 ThemeLabel.Size = UDim2.new(1, -100, 0, 28)
-ThemeLabel.Position = UDim2.fromOffset(0, 243)
+ThemeLabel.Position = UDim2.fromOffset(0, 246)
 ThemeLabel.BackgroundTransparency = 1
 ThemeLabel.Text = "Tema"
 ThemeLabel.Font = Enum.Font.GothamBold
@@ -833,7 +830,7 @@ ThemeLabel.Parent = ConfigPage
 
 local ThemeButton = Instance.new("TextButton")
 ThemeButton.Size = UDim2.fromOffset(90, 28)
-ThemeButton.Position = UDim2.new(1, -90, 0, 243)
+ThemeButton.Position = UDim2.new(1, -90, 0, 246)
 ThemeButton.BackgroundColor3 = Color3.fromRGB(15, 22, 32)
 ThemeButton.Text = "Oscuro ▼"
 ThemeButton.Font = Enum.Font.Gotham
@@ -846,7 +843,7 @@ local ThemeButtonStroke = st(ThemeButton, Color3.fromRGB(0, 125, 255), 1)
 
 local ThemeOptions = Instance.new("Frame")
 ThemeOptions.Size = UDim2.fromOffset(110, 66)
-ThemeOptions.Position = UDim2.new(1, -110, 0, 273)
+ThemeOptions.Position = UDim2.new(1, -110, 0, 278)
 ThemeOptions.BackgroundColor3 = Color3.fromRGB(8, 12, 18)
 ThemeOptions.Visible = false
 ThemeOptions.ZIndex = 30
@@ -874,7 +871,7 @@ Dark.Parent = ThemeOptions
 
 local Exit = Instance.new("TextButton")
 Exit.Size = UDim2.new(1, 0, 0, 30)
-Exit.Position = UDim2.fromOffset(0, 287)
+Exit.Position = UDim2.fromOffset(0, 352)
 Exit.BackgroundColor3 = Color3.fromRGB(75, 25, 30)
 Exit.Text = "EXIT"
 Exit.Font = Enum.Font.GothamBold
